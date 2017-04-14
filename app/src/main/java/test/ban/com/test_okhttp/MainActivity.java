@@ -11,7 +11,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import test.ban.com.test_okhttp.model.ICallback;
+import test.ban.com.test_okhttp.present.IPresent;
+import test.ban.com.test_okhttp.view.IView;
+
+public class MainActivity extends AppCompatActivity implements IView{
     private Button btn_test;
     private TextView tv_test_content;
     @Override
@@ -73,5 +77,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void showView(Object object) {
+        String message=changeMsg(object);
+        tv_test_content.setText(message);
+    }
+
+    private String changeMsg(Object object) {
+        return "hello ban";
     }
 }
