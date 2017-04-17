@@ -11,13 +11,16 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import test.ban.com.test_okhttp.model.ICallback;
 import test.ban.com.test_okhttp.present.IPresent;
+import test.ban.com.test_okhttp.present.impl.PresentImpl;
 import test.ban.com.test_okhttp.view.IView;
 
 public class MainActivity extends AppCompatActivity implements IView{
     private Button btn_test;
     private TextView tv_test_content;
+    private IPresent present;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,14 @@ public class MainActivity extends AppCompatActivity implements IView{
             }
         });
         initView();
+        initData();
         setListeners();
+
     }
+
+
+
+
 
     /**
      *
@@ -45,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements IView{
         btn_test= (Button) findViewById(R.id.btn_test);
     }
 
+    private void initData() {
+        present=new PresentImpl(this);
+    }
+
     /**
      *
      */
@@ -52,9 +65,13 @@ public class MainActivity extends AppCompatActivity implements IView{
         btn_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                setParams();
             }
         });
+    }
+
+    private void setParams() {
+        present.getMessageFromModel("");
     }
 
     @Override
@@ -87,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements IView{
     }
 
     private String changeMsg(Object object) {
-        return "hello ban";
+
+        return (String)object;
     }
 }
